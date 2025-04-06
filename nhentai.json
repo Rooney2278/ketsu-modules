@@ -1,0 +1,18 @@
+{
+  "name": "NHentai (Fixed)",
+  "author": "ChatGPT",
+  "version": 1,
+  "content": {
+    "type": "manga",
+    "cover": "{{ cover }}",
+    "title": "{{ title }}",
+    "description": "{{ info }}",
+    "chapters": [
+      {
+        "title": "Read",
+        "urls": "{{ images }}"
+      }
+    ]
+  },
+  "script": "module.exports = async function ({ cheerio, axios, require, params }) {\n  const data = JSON.parse(params.extra);\n  const mediaId = data.media_id;\n  const pages = data.images.pages;\n\n  const getExt = (t) => t === 'j' ? 'jpg' : t === 'p' ? 'png' : 'gif';\n  const images = pages.map((page, i) => `https://i.nhentai.net/galleries/${mediaId}/${i + 1}.${getExt(page.t)}`);\n\n  return {\n    title: data.title.english || data.title.japanese || 'NHentai',\n    info: `Tags: ${(data.tags || []).map(t => t.name).join(', ')}`,\n    cover: `https://t.nhentai.net/galleries/${mediaId}/cover.${getExt(data.images.cover.t)}`,\n    images: images\n  }\n}"
+}
