@@ -1,7 +1,11 @@
 {
-  "name": "NHentai (Fixed)",
-  "author": "ChatGPT",
-  "version": 1,
+  "moduleInfo": {
+    "name": "NHentai (Fixed)",
+    "version": 1,
+    "author": "ChatGPT",
+    "description": "Fixed module for NHentai that generates image URLs dynamically from gallery JSON",
+    "type": "source"
+  },
   "content": {
     "type": "manga",
     "cover": "{{ cover }}",
